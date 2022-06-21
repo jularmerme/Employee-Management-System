@@ -1,0 +1,91 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class="text-center">Edit Employee</h3>
+  <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+    <div class="form-group">
+      <label>Name : </label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="employee.name"
+        name="name"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Type your name "
+        #name="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+      >
+        <div *ngIf="name.errors?.['required']">Type your Name</div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name should be at least 4 characters long
+        </div>
+        <div *ngIf="name.errors?.['maxlength']">
+          Name long limit is 10 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name : </label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        [(ngModel)]="employee.lastName"
+        name="lastName"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Type your lastname "
+        #lastName="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+      >
+        <div *ngIf="lastName.errors?.['required']">
+          Please enter your lastName
+        </div>
+        <div *ngIf="lastName.errors?.['minlegth']">
+          Last name should be at least 10 characters long
+        </div>
+        <div *ngIf="lastName.errors?.['maxlength']">
+          Last name max character long is 10
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email : </label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="employee.email"
+        name="email"
+        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+        required
+        placeholder="Enter your email "
+        #email="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="email.invalid && (email.dirty || lastName.touched)"
+      >
+        <div *ngIf="email.errors?.['required']">
+          Please enter you email adddress
+        </div>
+        <div *ngIf="email.errors?.['pattern']">
+          The email address should following structure : user100@gmail.com
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success" [disabled]="!employeeForm.form.valid">
+      Save
+    </button>
+  </form>
+</div>
